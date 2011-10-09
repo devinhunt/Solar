@@ -7,14 +7,16 @@ window.Actor = function(x, y){
     this.y = y || 0;
     
     this.theta = 0;
-    this.thrust = 0;
+    this.velocity = 0;
     
     
-    this.update = function() {
-        
+    this.update = function(delta) {
+        this.x += Math.cos(this.theta) * this.velocity * delta;
+        this.y += Math.sin(this.theta) * this.velocity * delta;
     };
     
     this.render = function() {
+        ctx.fillStyle="#000000";
         drawCircle(this.x, this.y, 10);
     };
 };

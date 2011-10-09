@@ -16,6 +16,9 @@
         canvas.height = 600;
         document.body.appendChild(canvas);
     };
+    
+    /** You! */
+    var player = new Actor(400, 300);
 
     /**
      * Main game loop
@@ -34,7 +37,7 @@
      * Update all game objects 
      */
     var update = function(delta) {
-    
+        player.update(delta);
     };
 
 
@@ -42,7 +45,12 @@
      * Render the world
      */
     var render = function() {
-    
+        backgroundClear();
+        player.render();
     };
+    
+    // Kickoff!
+    var then = Date.now();
+    setInterval(loopdeloop, 1);
     
 })();
