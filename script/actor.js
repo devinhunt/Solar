@@ -11,6 +11,23 @@ window.Actor = function(x, y){
     
     
     this.update = function(delta) {
+        
+        // Thrust
+        if(Input.isPressed(Input.UP)) {
+            this.velocity = 100;
+        } else {
+            this.velocity = 0;
+        }
+        
+        // Diretion
+        if(Input.isPressed(Input.LEFT)) {
+            this.theta -= .01;
+        }
+        
+        if(Input.isPressed(Input.RIGHT)) {
+            this.theta += .01;
+        }
+        
         this.x += Math.cos(this.theta) * this.velocity * delta;
         this.y += Math.sin(this.theta) * this.velocity * delta;
     };
