@@ -35,5 +35,9 @@ window.Actor = function(x, y){
     this.render = function() {
         ctx.fillStyle="#000000";
         drawCircle(this.x, this.y, 10);
+        
+        ctx.strokeStyle = "#ff0000";
+        ctx.lineWidth = 2;
+        drawLine(this.x, this.y, this.x + 15 * Math.cos(this.theta), this.y + 15 * Math.sin(this.theta));
     };
 };
