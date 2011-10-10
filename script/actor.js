@@ -9,14 +9,13 @@ window.Actor = function(x, y){
     this.theta = 0;
     this.velocity = 0;
     
+    this.energy = 100;
     
     this.update = function(delta) {
         
         // Thrust
-        if(Input.isPressed(Input.UP)) {
-            this.velocity = 100;
-        } else {
-            this.velocity = 0;
+        if(Input.isPressed(Input.UP) && this.velocity < 100) {
+            this.velocity += .5;
         }
         
         // Diretion
