@@ -3,19 +3,24 @@
  */
 
 window.Actor = function(x, y){
-    this.x = x || 0;
-    this.y = y || 0;
     
+    /** Current position */
+    this.p = new Vector(x, y);
+    
+    /** Current velocity */
+    this.v = new Vector();
+    
+    /** Direction we're facing */
     this.theta = 0;
-    this.velocity = 0;
     
+    /** Total energy */
     this.energy = 100;
     
     this.update = function(delta) {
         
         // Thrust
-        if(Input.isPressed(Input.UP) && this.velocity < 100) {
-            this.velocity += .5;
+        if(Input.isPressed(Input.UP) && this.v.length() < 100) {
+            this.v.addIn({x: Math.cos(this.theta) * delta, y: Math.sin(this.theta) * delta});
         }
         
         // Diretion
@@ -27,16 +32,15 @@ window.Actor = function(x, y){
             this.theta += .01;
         }
         
-        this.x += Math.cos(this.theta) * this.velocity * delta;
-        this.y += Math.sin(this.theta) * this.velocity * delta;
+        this.p.addIn(this.v);
     };
     
     this.render = function() {
         ctx.fillStyle="#000000";
-        drawCircle(this.x, this.y, 10);
+        drawCircle(this.p.x, this.p.y, 10);
         
         ctx.strokeStyle = "#ff0000";
         ctx.lineWidth = 2;
-        drawLine(this.x, this.y, this.x + 15 * Math.cos(this.theta), this.y + 15 * Math.sin(this.theta));
+        drawLine(this.p.x, this.p.y, this.p.x + 15 * Math.cos(this.theta), this.p.y + 15 * Math.sin(this.theta));
     };
 };
