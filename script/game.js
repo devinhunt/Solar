@@ -18,7 +18,7 @@
     };
     
     /** You! */
-    var player = new Actor(400, 300);
+    var player = new Player(400, 300);
 
     /**
      * Main game loop
