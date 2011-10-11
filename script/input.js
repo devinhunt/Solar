@@ -9,6 +9,7 @@ window.Input = new (function() {
     this.UP = 38;
     this.RIGHT = 39;
     this.DOWN = 40;
+    this.FIRE = 90;
     
     /** 
      * Holds the states of keys pressed. 

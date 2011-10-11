@@ -19,6 +19,9 @@
     
     /** You! */
     var player = new Player(400, 300);
+    
+    /** Bunch of simple particles */
+    var bullets = [];
 
     /**
      * Main game loop
@@ -37,6 +40,34 @@
      * Update all game objects 
      */
     var update = function(delta) {
+        // bullets
+        for(b in bullets) {
+            bullets[b].update(delta);
+        }
+        
+        // Thrust
+        if(Input.isPressed(Input.UP)) {
+            player.vx += Math.cos(player.theta) * player.thrust * delta;
+            player.vy += Math.sin(player.theta) * player.thrust * delta;
+        }
+        
+        // Direction
+        if(Input.isPressed(Input.LEFT)) {
+            player.theta -= .01;
+        }
+        if(Input.isPressed(Input.RIGHT)) {
+            player.theta += .01;
+        }
+        
+        // shoots!
+        if(Input.isPressed(Input.FIRE)) {
+            var b = new Actor(player.x, 
+                    player.y, 
+                    200 * Math.cos(player.theta), 
+                    200 * Math.sin(player.theta))
+            bullets.push(b);
+        }
+        
         player.update(delta);
     };
 
@@ -46,6 +77,10 @@
      */
     var render = function() {
         backgroundClear();
+        
+        for(b in bullets) {
+            bullets[b].render();
+        }
         player.render();
     };
     

@@ -44,21 +44,6 @@ Player = function(x, y) {
 
 _.extend(Player.prototype, Actor.prototype, {
     update: function(delta) {
-        // Thrust
-        if(Input.isPressed(Input.UP)) {
-            this.vx += Math.cos(this.theta) * this.thrust * delta;
-            this.vy += Math.sin(this.theta) * this.thrust * delta;
-        }
-        
-        // Direction
-        if(Input.isPressed(Input.LEFT)) {
-            this.theta -= .01;
-        }
-        
-        if(Input.isPressed(Input.RIGHT)) {
-            this.theta += .01;
-        }
-        
         this.x += this.vx * delta;
         this.y += this.vy * delta;
     },
