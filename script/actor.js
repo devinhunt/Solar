@@ -1,14 +1,14 @@
 /**
  * Actors are the basic game-unit that appear on the screen and move about
  */
-Actor = function(x, y){
+Actor = function(x, y, vx, vy){
     /** Current position */
     this.x = x || 0;
     this.y = y || 0;
     
     /** Current velocity */
-    this.vx = 0;
-    this.vy = 0;
+    this.vx = vx || 0;
+    this.vy = vy || 0;
 };
 Actor.prototype = {
     update: function(delta) {
@@ -41,6 +41,7 @@ Player = function(x, y) {
     /** Total energy */
     this.energy = 100;
 };
+
 _.extend(Player.prototype, Actor.prototype, {
     update: function(delta) {
         // Thrust
@@ -49,7 +50,7 @@ _.extend(Player.prototype, Actor.prototype, {
             this.vy += Math.sin(this.theta) * this.thrust * delta;
         }
         
-        // Diretion
+        // Direction
         if(Input.isPressed(Input.LEFT)) {
             this.theta -= .01;
         }
